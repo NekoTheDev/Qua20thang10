@@ -5,7 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Women's Day</title>
+    <!-- Favicon HK18 -->
+    <link rel="icon" href="./image/favicon.jpg" type="image/x-icon">
+    <title>HK18 Women's Day</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap-grid.min.css"
         integrity="sha512-JQksK36WdRekVrvdxNyV3B0Q1huqbTkIQNbz1dlcFVgNynEMRl0F8OSqOGdVppLUDIvsOejhr/W5L3G/b3J+8w=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -13,9 +15,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
         integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
-    <!-- Thêm import font Great Vibes cho chữ ký -->
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Coiny&family=Imperial+Script&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <style>
         .container {
@@ -43,9 +45,15 @@
             background-color: #fae1dd;
         }
 
+        #castle { position: relative; }
+
         .letter {
-            position: relative;
-            z-index: 1;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            pointer-events: auto;
         }
 
         .valentines {
@@ -271,11 +279,16 @@
         }
 
         #castle {
+            position: relative;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 60vh; /* reduce huge empty space on large screens */
+            height: auto;
+            padding: 6vh 0;
             background-color: #fae1dd;
+            box-sizing: border-box;
+            overflow: visible;
         }
 
         .dustDef {
@@ -349,14 +362,11 @@
         }
 
         svg {
-            width: 80%;
+            width: min(1200px, 80%);
+            max-width: 95vw;
             display: block;
-            position: absolute;
-            margin: auto;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
+            position: relative;
+            margin: 0 auto;
             z-index: 1;
         }
 
@@ -402,21 +412,29 @@
 
         .boxLetter {
             width: 100%;
-            height: 100%;
+            height: 100vh;
+            /* background: radial-gradient(circle at top left, #ffe6f2 0%, #fff5fa 40%, #fdfdfd 100%); */
             display: flex;
             justify-content: center;
             align-items: center;
+            padding: 20px;
+            /* position: relative; */
+            /* backdrop-filter: blur(4px); */
+            z-index: 1;
         }
 
         .boxLetter .formLetter {
             position: relative;
-            width: 600px;
-            height: 350px;
+            width: min(830px, 100vw); /* larger on desktop, responsive */
+            height: min(520px, 80vh);
             background-color: #FFEBEB;
             border-radius: 20px;
             z-index: 100;
-            padding: 20px 15px;
-            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            padding: 24px 20px;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 6px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .formLetter .wrapperLetter {
@@ -426,14 +444,18 @@
             border: 2px dashed #FF6666;
             border-radius: inherit;
             display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
         .boxLetter .before {
             position: absolute;
-            width: 600px;
-            height: 350px;
+            width: calc(min(800px, 90vw) + 40px);
+            height: calc(min(520px, 75vh) + 40px);
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%) rotate(-15deg);
             background: #fff;
-            transform: rotate(-15deg);
             border-radius: 20px;
             z-index: 10;
         }
@@ -488,15 +510,21 @@
 
         .giftbox {
             position: relative;
-            width: 40%;
+            flex: 0 0 40%; /* keep roughly 40% of wrapper space */
+            max-width: 40%;
             height: 100%;
+            display: flex;
+            align-items: center; /* keep image near bottom */
+            justify-content: center;
+            padding-left: 8px;
+            box-sizing: border-box;
         }
 
         .giftbox .img {
-            position: absolute;
+            position: relative; /* keep it in the layout so it isn't clipped */
             width: 160px;
-            bottom: -10px;
-            left: 0px;
+            margin-bottom: -8px; /* small overlap like original design */
+            left: 0;
             z-index: 100;
         }
 
@@ -505,26 +533,30 @@
         }
 
         .textLetter {
-            width: 100%;
+            flex: 1 1 auto;
+            width: auto;
             flex-direction: column;
             justify-content: center;
             display: flex;
             align-items: center;
             user-select: none;
+            padding: 0 8px;
         }
 
         .textLetter h2 {
-            font-size: 30px;
-            font-weight: 700px;
-            font-family: 'Dancing Script', cursive; /* Giữ nguyên như ban đầu */
+            font-size: 46px; /* increased */
+            font-weight: 700;
+            font-family: 'Imperial Script', cursive; /* switched to Imperial Script */
+            margin: 0 0 8px 0;
+            text-align:center;
         }
 
-        .textLetter .contentLetter {
-            font-size: 19px;
+            .textLetter .contentLetter {
+            font-size: 35px;
             text-align: center;
             padding: 0px 30px;
             margin-top: 10px;
-            font-family: 'Dancing Script', cursive; /* Giữ nguyên như ban đầu */
+            font-family: 'Imperial Script', cursive; /* switched to Imperial Script */
             position: initial;
             /* Ngắt dòng an toàn khi văn bản dài và cho phép cuộn nội dung */
             word-break: break-word;
@@ -539,9 +571,17 @@
             position: absolute;
             right: 20px;
             top: 20px;
-            color: #fff;
+            font-size: 30px;
+            color: #ff5b7e;
             cursor: pointer;
             font-size: 25px;
+            z-index: 10;
+            transition: transform 0.2s ease, color 0.2s ease;
+        }
+
+        .fa-xmark:hover {
+            transform: scale(1.2);
+            color: #ff2b7e;
         }
 
         .show {
@@ -577,13 +617,13 @@
             width: 100%;
         }
 
-        .signature {
+            .signature {
             position: absolute;
             bottom: 10px;
             right: 90px;
-            font-weight: 700px;
-            font-family: 'Dancing Scrip', cursive; 
-            font-size: 20px;
+            font-weight: 700;
+            font-family: 'Imperial Script', cursive; 
+            font-size: 30px;
             color: #FF6666;
             font-style: italic;
             text-align: right;
@@ -601,7 +641,7 @@
             }
             .giftbox { display: none; } /* Ẩn ảnh hộp quà trong modal để dành chỗ cho chữ */
             .textLetter { padding: 6px 4px; }
-            .textLetter h2 { font-size: 24px; }
+            .textLetter h2 { font-size: 28px; }
             .textLetter .contentLetter {
                 font-size: 16px;
                 max-height: 58vh; /* Vùng cuộn nội dung */
@@ -616,35 +656,34 @@
 </head>
 
 <body>
-    <svg id="theSvg" viewBox="-120 -30 240 180" enable-background="new 0 0 174 148" xml:space="preserve">
-        <defs>
-            <filter id="f" filterUnits="userSpaceOnUse" x="-120" y="-30" width="120%" height="120%">
-                <feGaussianBlur in="SourceAlpha" stdDeviation="5" result="blur"></feGaussianBlur>
-                <feOffset in="blur" dx="3" dy="5" result="shadow"></feOffset>
-                <feFlood flood-color="rgba(3,0,0,1)" result="color" />
-                <feComposite in="color" in2="shadow" operator="in" />
-                <feComposite in="SourceGraphic" />
-            </filter>
-            <path id="shape" d="M0, 21.054 
-       C0, 21.054 24.618, -15.165 60.750, 8.554 
-       C93.249, 29.888 57.749, 96.888 0, 117.388
-       C-57.749, 96.888  -93.249, 29.888 -60.750, 8.554
-       C-24.618, -15.165  -0, 21.054 -0, 21.054z    
-    " />
-            <path id="partialPath" />
-        </defs>
-        <text dy="-2">
-            <textPath style="font-family: fantasy;" xlink:href="#partialPath" startOffset="12">
-                🌹Chúc Mừng Ngày 
-                🌹.........................................................................................................................................🌹Phụ 
-                Nữ Việt Nam 20/10!🌹
-            </textPath>
-        </text>
-        <use id="useThePath" xlink:href="#partialPath" stroke="white" stroke-width=".5" stroke-opacity=".5" fill="none"
-            style="display:none;" />
-    </svg>
-
     <div id="castle">
+        <svg id="theSvg" viewBox="-120 -30 240 180" enable-background="new 0 0 174 148" xml:space="preserve">
+            <defs>
+                <filter id="f" filterUnits="userSpaceOnUse" x="-120" y="-30" width="120%" height="120%">
+                    <feGaussianBlur in="SourceAlpha" stdDeviation="5" result="blur"></feGaussianBlur>
+                    <feOffset in="blur" dx="3" dy="5" result="shadow"></feOffset>
+                    <feFlood flood-color="rgba(3,0,0,1)" result="color" />
+                    <feComposite in="color" in2="shadow" operator="in" />
+                    <feComposite in="SourceGraphic" />
+                </filter>
+                <path id="shape" d="M0, 21.054 
+           C0, 21.054 24.618, -15.165 60.750, 8.554 
+           C93.249, 29.888 57.749, 96.888 0, 117.388
+           C-57.749, 96.888  -93.249, 29.888 -60.750, 8.554
+           C-24.618, -15.165  -0, 21.054 -0, 21.054z    
+        " />
+                <path id="partialPath" />
+            </defs>
+            <text dy="-2">
+                <textPath style="font-family: 'Coiny', system-ui;" xlink:href="#partialPath" startOffset="12">
+                    🌹Phụ Nữ Việt Nam 20/10! 
+                    🌹............................................................................🌹Chúc
+                    Mừng Ngày🌹
+                </textPath>
+            </text>
+            <use id="useThePath" xlink:href="#partialPath" stroke="white" stroke-width=".5" stroke-opacity=".5" fill="none"
+                style="display:none;" />
+        </svg>
         <div class="letter">
             <div class="valentines">
                 <div class="envelope"></div>
@@ -695,7 +734,7 @@
                         <img src="./image/mewmew.gif" alt="">
                     </div>
                     <!-- Thêm chữ ký ở đây -->
-                    <div class="signature"><br>gửi em</div>
+                    <div class="signature"><br>-Tập thể nam HK18-</div>
                 </div>
             </div>
             <div class="before"></div>
@@ -850,7 +889,7 @@
 
         let indexText = 0;
         let textLetter = document.querySelector('.textLetter h2');
-        const textLetterH2 = "Hello cô giáo :)";
+        const textLetterH2 = "Kính chào cô Nguyên và các bạn nữ HK18!";
         let timoutTextLetter;
 
         function textCharLetter() {
@@ -877,9 +916,8 @@
 
         let indexTextContent = 0;
         let textLetterContent = document.querySelector('.contentLetter');
-        const textLetterP = `Tuy hơi sớm nhưng chắc anh là người đầu tiên rồi nhỉ. Anh chúc em luôn vui vẻ, hạnh phúc, không cần xinh nữa vì anh thấy như thế đủ rồi :)))). Sóng gió, buồn thế thôi cố gắng cười nhiều lên vì khi em cười là anh cũng thấy vui theo :)))
-Dù có thế nào đi nữa anh vẫn thật lòng chúc em có sự lựa chọn đúng đắn cho riêng mình. 
-À món quà này không biết em thích không nhưng anh nghĩ em hợp với nó đấy- Zai khó tính :)`;
+        const textLetterP = 
+        `Nhân ngày Phụ nữ Việt Nam 20/10, tập thể trai 11H xin được gửi lời chúc tới cô giáo và các bạn nữ trong lớp: luôn mạnh khỏe, xinh đẹp, hạnh phúc và thành công. Cảm ơn cô và các bạn nữ đã luôn mang đến cho lớp mình thật nhiều niềm vui và yêu thương! 🌸`;
         let timoutTextLetterContent;
         function textCharLetterContent() {
             if (indexTextContent < textLetterP.length) {
